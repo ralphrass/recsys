@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sistema de Recomendação</title>
+		<script>
+		var Movies; //CSV de filmes
+		var Ratings; //CSV de Avaliações
+		var UserItemMatrix = [], ItemUserMatrix = [], ItemItemSimilarityMatrix = [], MediasUsuarios = [], MatrizDeSimilaridades = [];
+		var NumUsers = 668; //Usuários do DataSet
+		var kNNLimit = 100; //Limite de vizinhos para usuario-usuario
+		var kNNLimitItems = 2000; //Limite de vizinhos para item-item
+		var kNN = 20;
+		var MaxRecomendacoes = 10;
+		var ROUND = 100000;
+		var MaxMovieId = 149532;
+		var TopRatedMovies = [];
+		</script>
+		<script src="PapaParse/papaparse.min.js"></script>
+		<!--<script src="js/math.min.js"></script>-->
+		<script src="js/utils.js"></script>
+		<script src="js/show.js"></script>
+		<script src="js/user-user-cf.js"></script>
+		<script src="js/item-item-cf.js"></script>
+		<script src="js/recsys.js"></script>
+	</head>
+	<body>
+		<form>
+			<input type="file" id="movies" onchange="handleFiles(this.files, 1)"><br>
+			<input type="file" id="ratings" onchange="handleFiles(this.files, 2)">
+			<div style="margin: 20px 0 20px 0">
+				<label for="user">Usuário: </label>
+				<input type="text" id="user" size="10" maxlength="3">
+				<input type="button" value="Ver Avaliações" onclick="mostrarAvaliacoes('user', 'showRatings')">
+				<label for="user2">Usuário 2: </label>
+				<input type="text" id="user2" size="10" maxlength="3">
+				<input type="button" value="Ver Avaliações" onclick="mostrarAvaliacoes('user2', 'showRatings2')">
+			</div>
+			<div style="margin: 20px 0 20px 0">
+				<input type="button" value="Recomendar para o Usuário 1 (U-U)" onclick="recomendarUserUser()">
+				<input type="button" value="Recomendar para o Usuário 1 (I-I)" onclick="recomendarItemItem()">
+			</div>
+			<table width="100%">
+				<tr>
+					<td id="showRatings" width="20%" valign="top"></td>
+					<td id="showRatings2" width="20%" valign="top"></td>
+					<td id="recomendacoes" valign="top"></td>
+				</tr>
+			</table>
+			<!--<div id="avaliacoes"></div>-->
+		</form>
+	</body>
+</html>
