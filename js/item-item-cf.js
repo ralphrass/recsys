@@ -6,7 +6,7 @@ function preverNotasItemItem(userId){
 
 	for (var filme in Movies){
 
-		if (usuarioNaoAvaliou(targetUserRatings, Movies[filme][0])){
+		//if (usuarioNaoAvaliou(targetUserRatings, Movies[filme][0])){
 
 			var somaSimilaridadesNumerador = 0, somaSimilaridadesDenominador = 0;
 
@@ -26,7 +26,7 @@ function preverNotasItemItem(userId){
 				previsao.rating = somaSimilaridadesNumerador / somaSimilaridadesDenominador;
 				previsoes[Movies[filme][0]] = previsao;
 			}
-		}
+		//}
 	}
 
 	previsoes.sort(function(a,b){

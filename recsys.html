@@ -5,7 +5,9 @@
 		<script>
 		var Movies; //CSV de filmes
 		var Ratings; //CSV de Avaliações
-		var UserItemMatrix = [], ItemUserMatrix = [], ItemItemSimilarityMatrix = [], MediasUsuarios = [], MatrizDeSimilaridades = [];
+		var TopRatedMovies = [];
+		var UserItemMatrix = [], ItemUserMatrix = [], ItemItemSimilarityMatrix = [], MediasUsuarios = [], MatrizDeSimilaridades = [], ItemProfileMatrix = [];
+		var MovieGenres = new Array();
 		var NumUsers = 668; //Usuários do DataSet
 		var kNNLimit = 100; //Limite de vizinhos para usuario-usuario
 		var kNNLimitItems = 2000; //Limite de vizinhos para item-item
@@ -13,14 +15,16 @@
 		var MaxRecomendacoes = 10;
 		var ROUND = 100000;
 		var MaxMovieId = 149532;
-		var TopRatedMovies = [];
+		var UserRatingCBFThreshold = 3;
 		</script>
 		<script src="PapaParse/papaparse.min.js"></script>
-		<!--<script src="js/math.min.js"></script>-->
+		<script src="js/math.min.js"></script>
 		<script src="js/utils.js"></script>
 		<script src="js/show.js"></script>
 		<script src="js/user-user-cf.js"></script>
 		<script src="js/item-item-cf.js"></script>
+		<script src="js/cbf.js"></script>
+		<script src="js/evaluation.js"></script>
 		<script src="js/recsys.js"></script>
 	</head>
 	<body>
@@ -38,6 +42,7 @@
 			<div style="margin: 20px 0 20px 0">
 				<input type="button" value="Recomendar para o Usuário 1 (U-U)" onclick="recomendarUserUser()">
 				<input type="button" value="Recomendar para o Usuário 1 (I-I)" onclick="recomendarItemItem()">
+				<input type="button" value="Recomendar para o Usuário 1 (CBF)" onclick="recommendCBF()">
 			</div>
 			<table width="100%">
 				<tr>

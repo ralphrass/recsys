@@ -1,3 +1,18 @@
+function recommendCBF(userId){
+
+	if (!userId){
+
+		userId = document.getElementById("user").value;
+	}
+
+	buildItemProfileMatrix();
+	var userProfile = buildUserProfile(userId);
+	var matches = itemUserMatches(userProfile);
+
+	//console.log(matches);
+	mostrarRecomendacoes(matches);
+}
+
 function recomendarItemItem(userId){
 
 	if (!userId){
@@ -22,6 +37,8 @@ function recomendarUserUser(userId){
 	montarMatrizDeSimilaridades(NumUsers, NumUsers, UserItemMatrix, pearsonCorrelation);
 	var previsoes = preverNotasUserUser(userId);
 	mostrarRecomendacoes(previsoes);
+
+	return previsoes;
 }
 
 /*
